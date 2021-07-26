@@ -31,7 +31,7 @@
     <button id="pause-recording" disabled>Pause</button>
     <button id="resume-recording" disabled>Resume</button>
 
-    <button id="save-recording" disabled>Save</button>
+    <!-- <button id="save-recording" disabled>Save</button> -->
 </section>
 
 <section class="experiment">
@@ -60,6 +60,8 @@
         this.disabled = true;
         mediaRecorder.stop();
         mediaRecorder.stream.stop();
+        // Adding save as soon as recording is stopped
+        mediaRecorder.save();
 
         document.querySelector('#pause-recording').disabled = true;
         document.querySelector('#start-recording').disabled = false;
@@ -79,12 +81,12 @@
         document.querySelector('#pause-recording').disabled = false;
     };
 
-    document.querySelector('#save-recording').onclick = function () {
-        this.disabled = true;
-        mediaRecorder.save();
+    // document.querySelector('#save-recording').onclick = function () {
+    //     this.disabled = true;
+    //     mediaRecorder.save();
 
-        // alert('Drop WebM file on Chrome or Firefox. Both can play entire file. VLC player or other players may not work.');
-    };
+    //     // alert('Drop WebM file on Chrome or Firefox. Both can play entire file. VLC player or other players may not work.');
+    // };
 
     let mediaRecorder;
 
