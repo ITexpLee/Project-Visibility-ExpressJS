@@ -4,6 +4,8 @@ const app = express();
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
+// Fetching module to run python scripts
+const { spawn } = require("child_process");
 
 //Setting up the view engine and it's directory
 app.engine("ejs", ejsMate);
@@ -17,9 +19,24 @@ app.use(express.static(path.join(__dirname, "public"))); //It will serve our sta
 
 //Default Index Route
 //We don't need to add backslash when rendering view pages
-app.get("/", (req, res) => {
-  res.send("Welcome to Visibility");
-});
+// app.get("/name", (req, res) => {
+//   // JavaScript object
+//   // const obj1 = { visit: "Oye Kool" };
+//   // const childPython = spawn("python", ["--version"]);
+//   const username = req.query.username;
+//   console.log(username);
+//   const childPython = spawn("python", ["hello.py", username]);
+//   //Execute the script
+//   childPython.stdout.on("data", (data) => {
+//     res.send(`stdOut: ${data}`);
+//   });
+//   childPython.stderr.on("data", (data) => {
+//     console.error(`stdError ${data}`);
+//   });
+//   childPython.on("close", (code) => {
+//     console.log(`child process exited with the code: ${code}`);
+//   });
+// });
 
 //Homepage Route
 app.get("/home", (req, res) => {
