@@ -21,24 +21,28 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="/assests/project-visibility.svg" title="Visibility Logo"></a>
+                <a class="navbar-brand" href="/"><img src="/assests/project-visibility.svg" title="Visibility Logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                     aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <div class="navbar-nav text-uppercase ms-auto p-1">
-                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
-                        <a class="nav-link" href="#">About Nhai</a>
+                        <a class="nav-link <%= title === "home" ? "active": "" %>" aria-current="page" href="/">Home</a>
+                        <a class="nav-link <%= title === "about" ? "active": "" %>" href="/about">About Nhai</a>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">Programmes</a>
+                            <a class="nav-link dropdown-toggle <%= title === "programs" ? "active": "" %>" href="#"
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Programmes</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">National Highway Project</a></li>
-                                <li><a class="dropdown-item" href="#">Legal and Arbitration</a></li>
-                                <li><a class="dropdown-item" href="#">Environment</a></li>
-                                <li><a class="dropdown-item" href="#">Project Information</a></li>
-                                <li><a class="dropdown-item" href="#">Road Safety</a></li>
+                                <li><a class="dropdown-item" href="programs/nationalhighway">National Highway
+                                        Project</a></li>
+                                <li><a class="dropdown-item" href="programs/legalArbitration">Legal and
+                                        Arbitration</a></li>
+                                <li><a class="dropdown-item" href="programs/environment">Environment</a></li>
+                                <li><a class="dropdown-item" href="programs/projectInformation">Project Information</a>
+                                </li>
+                                <li><a class="dropdown-item" href="programs/roadsafety">Road Safety</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -60,8 +64,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+    <!-- Typed.js cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js"
+        integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Microphone permission -->
     <script src="/js/useraudio.js"></script>
+    <!-- Developer Typed.js file -->
+    <script src="/js/typed.js"></script>
+    <!-- Developer Index.js file -->
+    <script src="/js/index.js"></script>
 </body>
 
 </html>

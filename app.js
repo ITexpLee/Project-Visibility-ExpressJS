@@ -15,10 +15,27 @@ app.use(express.urlencoded({ extended: true })); //req.body is parsed as a form
 app.use(methodOverride("_method")); //Setting the query for method-override
 app.use(express.static(path.join(__dirname, "public"))); //It will serve our static files
 
-//Homepage Route
+// Index/Homepage Route
 app.get("/", (req, res) => {
+  res.locals.title = "home";
   res.render("home/home.ejs");
 });
+
+// About Route
+app.get("/about", (req, res) => {
+  res.locals.title = "about";
+  res.render("about/about.ejs");
+});
+
+//Programmes Route
+app.get("/programs/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  res.locals.title = "programs";
+  res.render("programs/programs.ejs", { id: id });
+});
+
+app.get("/");
 
 //Starting up server
 app.listen(3000, () => {
