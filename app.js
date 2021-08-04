@@ -38,6 +38,7 @@ app.get("/programs/:id", (req, res) => {
 app.get("/");
 
 //Starting up server
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
   console.log("You are listening at PORT: 3000");
 });
