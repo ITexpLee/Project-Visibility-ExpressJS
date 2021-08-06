@@ -40,5 +40,5 @@ app.get("/");
 //Starting up server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log("You are listening at PORT: 3000");
+  console.log(`You are listening at PORT: ${port}`);
 });

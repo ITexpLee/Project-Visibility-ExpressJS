@@ -11,6 +11,9 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- animate Css CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Web Rtc CDN -->
+    <script src="https://cdn.WebRTC-Experiment.com/MediaStreamRecorder.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <!-- Developer Css File-->
     <link rel="stylesheet" href="/css/index.css">
 </head>
@@ -59,6 +62,10 @@
             </div>
         </nav>
     </header>
+    <!-- Default Audio -->
+    <audio src="/audio/default.mp3" class="d-none" id="initial-audio"></audio>
+    <!-- Audio Section Starts -->
+    <div id="audios-container"></div>
     <%-body-%>
     <!--Bootstrap Combined Js file-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -68,6 +75,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js"
         integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Web Rtc CDN 2 -->
+    <script src="https://cdn.webrtc-experiment.com/commits.js" async></script>
     <!-- Microphone permission -->
     <script src="/js/useraudio.js"></script>
     <!-- Developer Typed.js file -->
