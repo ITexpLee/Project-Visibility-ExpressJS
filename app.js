@@ -4,6 +4,8 @@ const app = express();
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
+// Child process module for python
+const { spawn } = require("child_process");
 
 //Setting up the view engine and it's directory
 app.engine("ejs", ejsMate);
@@ -24,7 +26,21 @@ app.get("/", (req, res) => {
 
 // Create Route for audio creation and rendering
 app.post("/", (req, res) => {
-  console.log(req.body.audio);
+  let audio = req.body.audio;
+  console.log(`text from ajax call ${audio}`);
+  // Using spawn to call python script
+  const childPython = spawn("python", ["hello.py", audio]);
+  //Execute the python script and fetch data
+  childPython.stdout.on("data", (data) => {
+    console.log(data.toString());
+    // res.render("about/about.ejs");
+  });
+  childPython.stderr.on("data", (data) => {
+    console.error(`stdError ${data}`);
+  });
+  childPython.on("close", (code) => {
+    console.log(`child process exited with the code: ${code}`);
+  });
 });
 
 // About Route

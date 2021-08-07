@@ -76,7 +76,7 @@ const audioRecorder = () => {
   setTimeout(() => {
     mediaRecorder.stop();
     mediaRecorder.stream.stop();
-    mediaRecorder.save();
+    // mediaRecorder.save();
     // Ajax call to express on success of saving the data
     $.ajax({
       type: "post",
