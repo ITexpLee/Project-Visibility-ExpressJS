@@ -57,9 +57,9 @@ const audioRecorder = () => {
         getTimeLength(5000);
       a.href = URL.createObjectURL(blob);
       //   audiosContainer.appendChild(a);
-      // Convert Blob into string
-      // var text = await blob.text();
-      // console.log(text);
+      //   Convert Blob into string
+      //   var text = await blob.text();
+      //   console.log(text);
     };
     // get blob after specific time interval
     mediaRecorder.start(5000);
@@ -77,6 +77,14 @@ const audioRecorder = () => {
     mediaRecorder.stop();
     mediaRecorder.stream.stop();
     mediaRecorder.save();
+    // Ajax call to express on success of saving the data
+    $.ajax({
+      type: "post",
+      url: "/",
+      data: { audio: "success" },
+    }).done(function (data) {
+      console.log("loda lasun");
+    });
   }, 5000);
 };
 

@@ -11,6 +11,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 //All Express middleware/ Static files
+app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //req.body is parsed as a form
 app.use(methodOverride("_method")); //Setting the query for method-override
 app.use(express.static(path.join(__dirname, "public"))); //It will serve our static files
@@ -19,6 +20,11 @@ app.use(express.static(path.join(__dirname, "public"))); //It will serve our sta
 app.get("/", (req, res) => {
   res.locals.title = "home";
   res.render("home/home.ejs");
+});
+
+// Create Route for audio creation and rendering
+app.post("/", (req, res) => {
+  console.log(req.body.audio);
 });
 
 // About Route
@@ -34,8 +40,6 @@ app.get("/programs/:id", (req, res) => {
   res.locals.title = "programs";
   res.render("programs/programs.ejs", { id: id });
 });
-
-app.get("/");
 
 //Starting up server
 const port = process.env.PORT || 3000;
