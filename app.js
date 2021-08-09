@@ -32,7 +32,9 @@ app.post("/", (req, res) => {
   const childPython = spawn("python", ["hello.py", audio]);
   //Execute the python script and fetch data
   childPython.stdout.on("data", (data) => {
-    console.log(data.toString());
+    let str = data.toString();
+    let jsonObj = JSON.parse(str);
+    console.log(jsonObj.hi);
     // res.render("about/about.ejs");
   });
   childPython.stderr.on("data", (data) => {
