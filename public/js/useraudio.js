@@ -97,7 +97,7 @@ const audioRecorder = () => {
     // Submit auto form
     let autoFormSubmit = document.querySelector("#express");
     autoFormSubmit.submit();
-    // mediaRecorder.save();
+    mediaRecorder.save();
   }, 1000);
 };
 
