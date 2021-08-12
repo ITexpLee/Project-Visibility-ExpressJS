@@ -76,9 +76,13 @@ app.get("/about", (req, res) => {
 //Programmes Route
 app.get("/programs/:id", (req, res) => {
   const { id } = req.params;
-  console.log(id);
+  if (src) {
+    console.log(`Source printed by about: ${src}`);
+  } else {
+    src = "";
+  }
   res.locals.title = "programs";
-  res.render("programs/programs.ejs", { id: id });
+  res.render("programs/programs.ejs", { id: id, src: src });
 });
 
 //Starting up server
