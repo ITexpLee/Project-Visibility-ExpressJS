@@ -20,12 +20,20 @@ app.use(express.static(path.join(__dirname, "public"))); //It will serve our sta
 
 // Creating global variable for src file of mp3
 
+// Global variable to store audio src
+var src;
+
 // Index/Homepage Route
 app.get("/", (req, res) => {
   res.locals.title = "home";
-  res.render("home/home.ejs");
+  if (src) {
+    console.log(`Source printed by about: ${src}`);
+  } else {
+    src = "";
+  }
+  res.render("home/home.ejs", { src: src });
 });
-var src;
+
 // Create Route for audio creation and rendering
 app.post("/", (req, res) => {
   // Using spawn to call python script
@@ -40,6 +48,8 @@ app.post("/", (req, res) => {
     // Destructing the object and creating variables
     let str = jsonObj.str;
     src = jsonObj.src;
+    // User if he wants to stop traversing
+    // src = "stop";
     // Redirecting to the specified link
     res.redirect(str);
   });
@@ -56,8 +66,10 @@ app.get("/about", (req, res) => {
   res.locals.title = "about";
   if (src) {
     console.log(`Source printed by about: ${src}`);
+  } else {
+    src = "";
   }
-  res.render("about/about.ejs");
+  res.render("about/about.ejs", { src: src });
 });
 
 //Programmes Route

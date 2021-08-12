@@ -1,11 +1,29 @@
 // Playing deafult Audio when window is loaded
 window.addEventListener("load", () => {
+  pythonAudio();
+});
+
+const pythonAudio = () => {
+  let pageAudio = document.querySelector("#python-audio");
+  if (pageAudio.getAttribute("src") === "stop") {
+    console.log("stop");
+  } else {
+    if (pageAudio.getAttribute("src") !== "") {
+      pageAudio.play();
+      pageAudio.addEventListener("ended", defaultAudio);
+    } else {
+      defaultAudio();
+    }
+  }
+};
+
+const defaultAudio = () => {
   //get audio by id
   const initial = document.querySelector("#initial-audio");
   initial.play();
   //Start Recording after the audio stops
   initial.addEventListener("ended", startRecording);
-});
+};
 
 //function defined for error or success callback
 function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
@@ -80,14 +98,6 @@ const audioRecorder = () => {
     let autoFormSubmit = document.querySelector("#express");
     autoFormSubmit.submit();
     // mediaRecorder.save();
-    // Ajax call to express on success of saving the data
-    // $.ajax({
-    //   type: "post",
-    //   url: "/",
-    //   data: { audio: "success" },
-    // }).done(function (data) {
-    //   console.log(data);
-    // });
   }, 1000);
 };
 
