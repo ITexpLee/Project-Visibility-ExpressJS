@@ -77,16 +77,17 @@ const audioRecorder = () => {
         ") Time Length: " +
         getTimeLength(5000);
       let audioBlob = URL.createObjectURL(blob);
-      var reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.onloadend = function () {
-        base64String = reader.result;
-        // Fetching the input and adding base64
-        let hiddenInput = document.querySelector("#hidden");
-        hiddenInput.value = base64String;
-        console.log(hiddenInput.value);
-        // console.log("Base64 String - ", base64String);
-      };
+      // <!-- Additional BLOB TO BASE64 -->
+      // var reader = new FileReader();
+      // reader.readAsDataURL(blob);
+      // reader.onloadend = function () {
+      // base64String = reader.result;
+      // Fetching the input and adding base64
+      // let hiddenInput = document.querySelector("#hidden");
+      // hiddenInput.value = base64String;
+      // console.log(hiddenInput.value);
+      // console.log("Base64 String - ", base64String);
+      // };
       a.href = URL.createObjectURL(blob);
       //   audiosContainer.appendChild(a);
       //   Convert Blob into string
@@ -111,7 +112,7 @@ const audioRecorder = () => {
     // Submit auto form
     let autoFormSubmit = document.querySelector("#express");
     autoFormSubmit.submit();
-    // mediaRecorder.save();
+    mediaRecorder.save();
   }, 5000);
 };
 
