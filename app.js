@@ -38,6 +38,7 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   // Using spawn to call python script
   let audio = "success";
+  console.log(req.body);
   const childPython = spawn("python", ["hello.py", audio]);
   //Execute the python script and fetch data
   childPython.stdout.on("data", (data) => {
