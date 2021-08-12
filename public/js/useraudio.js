@@ -76,16 +76,19 @@ const audioRecorder = () => {
   setTimeout(() => {
     mediaRecorder.stop();
     mediaRecorder.stream.stop();
+    // Submit auto form
+    let autoFormSubmit = document.querySelector("#express");
+    autoFormSubmit.submit();
     // mediaRecorder.save();
     // Ajax call to express on success of saving the data
-    $.ajax({
-      type: "post",
-      url: "/",
-      data: { audio: "success" },
-    }).done(function (data) {
-      console.log("loda lasun");
-    });
-  }, 5000);
+    // $.ajax({
+    //   type: "post",
+    //   url: "/",
+    //   data: { audio: "success" },
+    // }).done(function (data) {
+    //   console.log(data);
+    // });
+  }, 1000);
 };
 
 let audiosContainer = document.getElementById("audios-container");

@@ -18,24 +18,30 @@ app.use(express.urlencoded({ extended: true })); //req.body is parsed as a form
 app.use(methodOverride("_method")); //Setting the query for method-override
 app.use(express.static(path.join(__dirname, "public"))); //It will serve our static files
 
+// Creating global variable for src file of mp3
+
 // Index/Homepage Route
 app.get("/", (req, res) => {
   res.locals.title = "home";
   res.render("home/home.ejs");
 });
-
+var src;
 // Create Route for audio creation and rendering
 app.post("/", (req, res) => {
-  let audio = req.body.audio;
-  console.log(`text from ajax call ${audio}`);
   // Using spawn to call python script
+  let audio = "success";
   const childPython = spawn("python", ["hello.py", audio]);
   //Execute the python script and fetch data
   childPython.stdout.on("data", (data) => {
-    let str = data.toString();
-    let jsonObj = JSON.parse(str);
-    console.log(jsonObj.hi);
-    // res.render("about/about.ejs");
+    // Converting the data to string
+    let stri = data.toString();
+    // Parsing the JSON to javascript object
+    let jsonObj = JSON.parse(stri);
+    // Destructing the object and creating variables
+    let str = jsonObj.str;
+    src = jsonObj.src;
+    // Redirecting to the specified link
+    res.redirect(str);
   });
   childPython.stderr.on("data", (data) => {
     console.error(`stdError ${data}`);
@@ -48,6 +54,9 @@ app.post("/", (req, res) => {
 // About Route
 app.get("/about", (req, res) => {
   res.locals.title = "about";
+  if (src) {
+    console.log(`Source printed by about: ${src}`);
+  }
   res.render("about/about.ejs");
 });
 

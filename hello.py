@@ -6,8 +6,9 @@ import sys
 # print('Welcome to codespace')
 # print('Welcome to codespace')
 # print('{"abc": "def"}')
-abc = "hi"
-print('{"' + abc + '" : "def" }')
+abc = "str"
+jio = "src"
+print('{"' + abc + '" : "/about", "' + jio + '" : "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"}')
 def abc():
     text = 'Hello JavaScript'
     return text
