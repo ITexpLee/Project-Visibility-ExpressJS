@@ -39,7 +39,7 @@ app.post("/", (req, res) => {
   // Using spawn to call python script
   let audio = "success";
   // console.log(req.body);
-  const childPython = spawn("python", ["hello.py", audio]);
+  const childPython = spawn("python", ["test_file_updated.py", audio]);
   //Execute the python script and fetch data
   childPython.stdout.on("data", (data) => {
     // Converting the data to string
@@ -48,6 +48,7 @@ app.post("/", (req, res) => {
     let jsonObj = JSON.parse(stri);
     // Destructing the object and creating variables
     let str = jsonObj.str;
+    console.log(str);
     src = jsonObj.src;
     // User if he wants to stop traversing
     // src = "stop";

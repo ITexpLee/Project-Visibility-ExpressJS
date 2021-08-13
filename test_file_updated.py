@@ -10,7 +10,7 @@ import glob
 import os
 
 
-url = 'https://visiblity.herokuapp.com'
+url = 'http://localhost:3000'
 
 
 def speech_to_text():
@@ -23,7 +23,6 @@ def speech_to_text():
     with audio_file as source:
         audio = r.record(source)
     text = r.recognize_google(audio)
-    os.remove(audio_file_path)
     return text
 
 
@@ -34,7 +33,7 @@ def text_to_speech(text):
     engine.runAndWait()
     language = 'en'
     myobj = gTTS(text=text, lang=language, slow=True)
-    myobj.save("C://Users//91981//Desktop//ProjectVisibility//sample.mp3")
+    myobj.save("D://All Projects//ColtSteele-Assigments//ProjectVisibility//public//audio//sample.mp3")
 
 
 
@@ -74,7 +73,7 @@ def find_link(links):
         # 'find' function returns index. If for any key, we find a non negative index, it means the key is present in our string
         if s.find(key) != -1:
             return links[key]
-    return 'exit'
+    return links['main']
 
 
 
@@ -85,10 +84,11 @@ def program(urls):
     flag = True
     while flag:
         input_speech = find_link(links)
+        temp_input = input_speech.split('3000/')[-1]
         path_key = "/audio/sample.mp3"
         str = "str"
         src = "src"
-        print('{"' + str + '" : "' + input_speech + '","' + src + '" : "' + path_key + '"}')
+        print('{"' + str + '" : "' + temp_input + '","' + src + '" : "' + path_key + '"}')
         if input_speech != 'exit':
             urls = input_speech
             page = urlopen(urls)
@@ -99,6 +99,10 @@ def program(urls):
             text_to_speech(text)
         else:
             flag = False
+        for name in glob.glob('Downloads/*'):
+            audio_file_path = name    
+        os.remove(audio_file_path)
+
 
 # import threading
 # thread_one= threading.Thread(name='searcher', target=program, args=())                

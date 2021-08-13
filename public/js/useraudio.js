@@ -18,6 +18,11 @@ const pythonAudio = () => {
 };
 
 const defaultAudio = () => {
+  // Checking if audio src exist
+  let pageAudio = document.querySelector("#python-audio");
+  if (pageAudio.getAttribute("src") !== "") {
+    pageAudio.setAttribute("src", "");
+  }
   //get audio by id
   const initial = document.querySelector("#initial-audio");
   initial.play();
