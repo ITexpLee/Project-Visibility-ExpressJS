@@ -6,50 +6,49 @@ from gtts import gTTS
 from playsound import playsound 
 import speech_recognition as sr
 import pyttsx3
-from nltk.stem.porter import PorterStemmer
+import glob
+import os
+
+
+url = 'https://visiblity.herokuapp.com'
+
+
+def speech_to_text():
+    ''' Converts audio file to text '''
+    # Initialize the recognizer 
+    r = sr.Recognizer()
+    for name in glob.glob('Downloads/*'):
+        audio_file_path = name
+    audio_file=sr.AudioFile(audio_file_path)
+    with audio_file as source:
+        audio = r.record(source)
+    text = r.recognize_google(audio)
+    os.remove(audio_file_path)
+    return text
+
 
 
 engine = pyttsx3.init()
-def speak(audio):
-    engine.say(audio)
-    print(audio)
+def text_to_speech(text):
+    ''' Text to Speech function, also saves audio file '''
     engine.runAndWait()
     language = 'en'
-    myobj = gTTS(text=audio, lang=language, slow=False)
-    myobj.save("C://Users//91981//Desktop//Visibility-Master//sample.mp3")
-speak('Hello')
+    myobj = gTTS(text=text, lang=language, slow=True)
+    myobj.save("C://Users//91981//Desktop//ProjectVisibility//sample.mp3")
 
-def speechtotext():
-    # Initialize the recognizer 
-    r = sr.Recognizer()   
 
-    # use the microphone as source for input.
-    with sr.Microphone() as source:
-        # wait for a second to let the recognizer
-        # adjust the energy threshold based on
-        # the surrounding noise level 
-        r.adjust_for_ambient_noise(source, duration=0.05)
 
-        #listens for the user's input 
-        audio = r.listen(source)
 
-        # Using google to recognize audio
-        MyText = r.recognize_google(audio)
-        MyText = MyText.lower()
 
-        print("Did you say:- "+MyText)
-        return MyText
 
-url = 'https://visiblity.herokuapp.com'
 def scrape(urls):
+    ''' Scrapes links '''
     grab = requests.get(urls)
     soup = BeautifulSoup(grab.text, 'html.parser')
 
-    speak('Opening our website.')
 
     websites = set()# traverse paragraphs from soup
     for link in soup.find_all('a'):
-        # print(link)
         data = link.get('href')
         websites.add(data)
 
@@ -58,63 +57,38 @@ def scrape(urls):
 
     for site in websites:
         if len(site) > 1:
-            # speak(site)
             if site[0] != '/':
                 site = '/' + site
             links[site.split('/')[-1].lower()] = urls + site
     return links
 
-# print(links)
-
-def string_processing(s):
-    crpus=[]
-    ps=PorterStemmer()
-    corpus=[]
-    review=re.sub('[^a-zA-Z]',' ',s)
-    review=review.lower()
-    review=review.split()
-    review=' '.join(review)
-    #description preprocessing
-    review=re.sub('[^a-zA-Z]',' ',s)
-
-    review=review.lower()
-    review=review.split()
-    review=''.join(review)
-    return review
 
 
-def find_link(dic):
-    s = input()
-    s=string_processing(s)
-    # print(s)
-    for key in dic:
-        if s.find(string_processing(key),0,len(s)) != -1:
-            print(dic[key])
-            return dic[key]
+
+def find_link(links):
+    ''' Finds link to open from input sentence '''
+    s = speech_to_text()
+    s = re.sub('[^a-zA-Z]','',s)
+    s = s.lower()
+    for key in links:
+        # 'find' function returns index. If for any key, we find a non negative index, it means the key is present in our string
+        if s.find(key) != -1:
+            return links[key]
     return 'exit'
 
 
-def program(urls,links):
-    speak('Do you want to stay on this page or go to another?')
-    # input_stay = speechtotext()
-    input_stay = input()
-    if 'stay' in input_stay:
-        page = urlopen(urls)
-        html = page.read().decode("utf-8")
-        soup = BeautifulSoup(html, "html.parser")
-        text = soup.get_text()
-        text = text.replace('\n',' ').split('system')[-1]
-        speak(text)
 
 
+def program(urls):
+    ''' Main Program '''
+    links = scrape(urls)
     flag = True
     while flag:
-        speak('Choose your option from :')
-        for k in links.keys():
-            speak(k)
-        # input_speech = speechtotext()
         input_speech = find_link(links)
-
+        path_key = "/audio/sample.mp3"
+        str = "str"
+        src = "src"
+        print('{"' + str + '" : "' + input_speech + '","' + src + '" : "' + path_key + '"}')
         if input_speech != 'exit':
             urls = input_speech
             page = urlopen(urls)
@@ -122,14 +96,12 @@ def program(urls,links):
             soup = BeautifulSoup(html, "html.parser")
             text = soup.get_text()
             text = text.replace('\n',' ').split('system')[-1]
-            speak(text)
+            text_to_speech(text)
         else:
-            speak('Closing program.')
             flag = False
 
 # import threading
 # thread_one= threading.Thread(name='searcher', target=program, args=())                
 # thread_one.start()
 
-links = scrape(url)
-program(url,links)
+program(url)
