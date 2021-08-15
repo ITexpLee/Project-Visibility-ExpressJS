@@ -86,8 +86,7 @@ def program(urls):
     html = page.read().decode("utf-8")
     soup = BeautifulSoup(html, "html.parser")
     text = soup.get_text()
-    acknowledgement = 'Opening ' + temp_input.split('/')[-1]
-    text = acknowledgement + text.replace('\n',' ').split('Technology')[-1]
+    text = text.replace('\n',' ').split('Technology')[-1]
     text_to_speech(text)
 
 # import threading

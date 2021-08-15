@@ -2,11 +2,9 @@
 
 let option = {
   strings: [
-    "blind people",
-    "I love braille",
-    "Blindness is not a problem it's a gift",
-    "Let's get blind together",
-    "Andho me kanha Raja",
+    "making world a better place",
+    "helping people",
+    "working together",
   ],
   loop: true,
   typeSpeed: 50,

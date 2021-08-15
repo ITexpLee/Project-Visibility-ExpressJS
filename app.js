@@ -89,7 +89,7 @@ app.get("/howtouse", (req, res) => {
 
 //More Routes
 // motivation Route
-app.get("/more/motivation", (req, res) => {
+app.get("/motivation", (req, res) => {
   const { id } = req.params;
   if (!src) {
     src = "";
@@ -99,7 +99,7 @@ app.get("/more/motivation", (req, res) => {
 });
 
 // benificiary Route
-app.get("/more/beneficiary", (req, res) => {
+app.get("/beneficiary", (req, res) => {
   const { id } = req.params;
   if (!src) {
     src = "";
@@ -109,7 +109,7 @@ app.get("/more/beneficiary", (req, res) => {
 });
 
 // technology Route
-app.get("/more/beneficiary", (req, res) => {
+app.get("/technology", (req, res) => {
   const { id } = req.params;
   if (!src) {
     src = "";
