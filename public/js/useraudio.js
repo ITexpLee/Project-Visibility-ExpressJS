@@ -1,6 +1,6 @@
 // Playing deafult Audio when window is loaded
 window.addEventListener("load", () => {
-  pythonAudio();
+  // pythonAudio();
 });
 
 const pythonAudio = () => {

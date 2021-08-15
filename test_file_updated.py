@@ -8,39 +8,30 @@ import speech_recognition as sr
 import pyttsx3
 import glob
 import os
-
+import sys
+import json
+import urllib
 
 url = 'http://localhost:3000'
-
-
-def speech_to_text():
-    ''' Converts audio file to text '''
-    # Initialize the recognizer 
-    r = sr.Recognizer()
-    for name in glob.glob('Downloads/*'):
-        audio_file_path = name
-    audio_file=sr.AudioFile(audio_file_path)
-    with audio_file as source:
-        audio = r.record(source)
-    text = r.recognize_google(audio)
-    return text
-
-
-
 engine = pyttsx3.init()
+
+def text_extractor():
+    # print('text extract')
+    ''' Extracts text from JS '''
+    text = str(sys.argv[1])
+    res = json.loads(text)
+    return (res['text'])
+
+# print(text_extractor())
 def text_to_speech(text):
     ''' Text to Speech function, also saves audio file '''
     engine.runAndWait()
     language = 'en'
     myobj = gTTS(text=text, lang=language, slow=True)
-    myobj.save("D://All Projects//ColtSteele-Assigments//ProjectVisibility//public//audio//sample.mp3")
-
-
-
-
-
+    myobj.save("public/audio/sample.mp3")
 
 def scrape(urls):
+    # print('text scrape')
     ''' Scrapes links '''
     grab = requests.get(urls)
     soup = BeautifulSoup(grab.text, 'html.parser')
@@ -62,50 +53,47 @@ def scrape(urls):
     return links
 
 
-
-
 def find_link(links):
+    # print('find links fun')
     ''' Finds link to open from input sentence '''
-    s = speech_to_text()
+    s = text_extractor()
+    # print(s)
     s = re.sub('[^a-zA-Z]','',s)
     s = s.lower()
     for key in links:
         # 'find' function returns index. If for any key, we find a non negative index, it means the key is present in our string
         if s.find(key) != -1:
-            return links[key]
-    return links['main']
-
-
-
+            return links[key] if key != 'main' else '/'
+    return 'stop'
 
 def program(urls):
-    ''' Main Program '''
     links = scrape(urls)
-    flag = True
-    while flag:
-        input_speech = find_link(links)
-        temp_input = input_speech.split('3000/')[-1]
-        path_key = "/audio/sample.mp3"
-        str = "str"
-        src = "src"
-        print('{"' + str + '" : "' + temp_input + '","' + src + '" : "' + path_key + '"}')
-        if input_speech != 'exit':
-            urls = input_speech
-            page = urlopen(urls)
-            html = page.read().decode("utf-8")
-            soup = BeautifulSoup(html, "html.parser")
-            text = soup.get_text()
-            text = text.replace('\n',' ').split('system')[-1]
-            text_to_speech(text)
-        else:
-            flag = False
-        for name in glob.glob('Downloads/*'):
-            audio_file_path = name    
-        os.remove(audio_file_path)
-
+    input_speech = find_link(links) 
+    # print('inp')
+    temp_input = input_speech.split('3000')[-1]
+    path_key = "/audio/sample.mp3"
+    str = "str"
+    src = "src"
+    if temp_input == 'stop':
+        input_speech = 'stop'
+        print('{"' + str + '":"' + input_speech + '","' + src + '":"' + input_speech + '"}')
+        exit()
+    print('{"' + str + '":"' + temp_input + '","' + src + '":"' + path_key + '"}')
+    if temp_input != '/':
+        urls = input_speech
+    # print(urls)
+    page = urllib.request.urlopen(urls)
+    html = page.read().decode("utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    text = soup.get_text()
+    acknowledgement = 'Opening ' + temp_input.split('/')[-1]
+    text = acknowledgement + text.replace('\n',' ').split('system')[-1]
+    text_to_speech(text)
 
 # import threading
 # thread_one= threading.Thread(name='searcher', target=program, args=())                
 # thread_one.start()
 
 program(url)
+
+# print(find_link(links))

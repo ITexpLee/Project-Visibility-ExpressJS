@@ -66,17 +66,21 @@
         </nav>
     </header>
     <!-- Default Audio -->
-    <audio src="/audio/default.mp3" class="d-none" id="initial-audio"></audio>
+    <audio src="/audio/intro.mp3" class="d-none" id="initial-audio"></audio>
     <!-- Python Audio -->
     <% if(src !== undefined) {%>
     <audio src="<%=src%>" class="d-none" id="python-audio"></audio>
     <% } %>
+    <!-- Stop Audio -->
+    <audio src="/audio/stop.mp3" class="d-none" id="stop-audio"></audio>
     <!-- Default form -->
     <form action="/" method="POST" id="express">
-        <input type="hidden" value="" id="hidden">
+        <input type="hidden" value="" id="user-text" name="user[text]">
+        <input type="hidden" value="" id="user-confidence" name="user[confidence]">
+        <input type="hidden" value="" id="current-url" name="user[url];">
     </form>
     <!-- Audio Section Starts -->
-    <div id="audios-container"></div>
+    <div id=" audios-container"></div>
     <%-body-%>
     <!--Bootstrap Combined Js file-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -88,8 +92,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Web Rtc CDN 2 -->
     <script src="https://cdn.webrtc-experiment.com/commits.js" async></script>
-    <!-- Microphone permission -->
+    <!-- Recording Audio and Sending to Server -->
     <script src="/js/useraudio.js"></script>
+    <!-- Speech to Text Conversion -->
+    <script src="/js/speechToText.js"></script>
     <!-- Developer Typed.js file -->
     <script src="/js/typed.js"></script>
     <!-- Developer Index.js file -->

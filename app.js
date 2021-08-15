@@ -26,34 +26,40 @@ var src;
 // Index/Homepage Route
 app.get("/", (req, res) => {
   res.locals.title = "home";
-  if (src) {
-    console.log(`Source printed by about: ${src}`);
-  } else {
+  if (!src) {
     src = "";
   }
   res.render("home/home.ejs", { src: src });
 });
 
-// Create Route for audio creation and rendering
+// Create Route for sending audio Text to python
 app.post("/", (req, res) => {
+  // Getting information out of Request body
+  var { url } = req.body.user;
+  const userInformation = req.body.user;
   // Using spawn to call python script
-  let audio = "success";
-  // console.log(req.body);
-  const childPython = spawn("python", ["test_file_updated.py", audio]);
+  const childPython = spawn("python", [
+    "test_file_updated.py",
+    JSON.stringify(userInformation),
+  ]);
   //Execute the python script and fetch data
   childPython.stdout.on("data", (data) => {
-    // Converting the data to string
-    let stri = data.toString();
-    // Parsing the JSON to javascript object
-    let jsonObj = JSON.parse(stri);
+    const doIt = data.toString();
+    // Parsing JSON to JavaScript Object
+    let pythonData = JSON.parse(data);
     // Destructing the object and creating variables
-    let str = jsonObj.str;
-    console.log(str);
-    src = jsonObj.src;
+    let str = pythonData.str;
+    src = pythonData.src;
+    console.log(`total python data ${doIt}`);
+    // console.log(`source printed by python ${src}`);
     // User if he wants to stop traversing
     // src = "stop";
     // Redirecting to the specified link
-    res.redirect(str);
+    if (str === "stop") {
+      res.redirect(url);
+    } else {
+      res.redirect(str);
+    }
   });
   childPython.stderr.on("data", (data) => {
     console.error(`stdError ${data}`);
@@ -66,9 +72,7 @@ app.post("/", (req, res) => {
 // About Route
 app.get("/about", (req, res) => {
   res.locals.title = "about";
-  if (src) {
-    console.log(`Source printed by about: ${src}`);
-  } else {
+  if (!src) {
     src = "";
   }
   res.render("about/about.ejs", { src: src });
@@ -77,9 +81,7 @@ app.get("/about", (req, res) => {
 //Programmes Route
 app.get("/programs/:id", (req, res) => {
   const { id } = req.params;
-  if (src) {
-    console.log(`Source printed by about: ${src}`);
-  } else {
+  if (!src) {
     src = "";
   }
   res.locals.title = "programs";
