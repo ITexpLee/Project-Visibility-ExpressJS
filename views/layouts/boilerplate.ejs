@@ -11,9 +11,6 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- animate Css CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <!-- Web Rtc CDN -->
-    <script src="https://cdn.WebRTC-Experiment.com/MediaStreamRecorder.js"></script>
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <!-- Jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -22,12 +19,12 @@
 </head>
 
 <body>
-    <!--Navbar-->
+    <!--Navbar Section Starts-->
     <!-- ul/li was added for dropdown. text lowercase for sub menu -->
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img src="/assests/project-visibility.svg" title="Visibility Logo"></a>
+                <a class="navbar-brand" href="/"><img src="/assests/logo2.png" title="Visibility Logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                     aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,29 +32,16 @@
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <div class="navbar-nav text-uppercase ms-auto p-1">
                         <a class="nav-link <%= title === "home" ? "active": "" %>" aria-current="page" href="/">Home</a>
-                        <a class="nav-link <%= title === "about" ? "active": "" %>" href="/about">About Nhai</a>
+                        <a class="nav-link <%= title === "about" ? "active": "" %>" href="/about">About Us</a>
+                        <a class="nav-link <%= title === "howtouse" ? "active": "" %>" href="/howtouse">How to Use</a>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <%= title === "programs" ? "active": "" %>" href="#"
+                            <a class="nav-link dropdown-toggle <%= title === "more" ? "active": "" %>" href="#"
                                 id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">Programmes</a>
+                                aria-expanded="false">More</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="programs/nationalhighway">National Highway
-                                        Project</a></li>
-                                <li><a class="dropdown-item" href="programs/legalArbitration">Legal and
-                                        Arbitration</a></li>
-                                <li><a class="dropdown-item" href="programs/environment">Environment</a></li>
-                                <li><a class="dropdown-item" href="programs/projectInformation">Project Information</a>
-                                </li>
-                                <li><a class="dropdown-item" href="programs/roadsafety">Road Safety</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">Road Networks</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Indian Networks</a></li>
-                                <li><a class="dropdown-item" href="#">ROB details</a></li>
-                                <li><a class="dropdown-item" href="#">Toll system</a></li>
+                                <li><a class="dropdown-item" href="more/motivation">Motivation</a></li>
+                                <li><a class="dropdown-item" href="more/benificiary">Benificiary</a></li>
+                                <li><a class="dropdown-item" href="programs/technology">Technology</a></li>
                             </ul>
                         </li>
                     </div>
@@ -65,6 +49,7 @@
             </div>
         </nav>
     </header>
+    <!-- Navbar Section Ends -->
     <!-- Default Audio -->
     <audio src="/audio/intro.mp3" class="d-none" id="initial-audio"></audio>
     <!-- Python Audio -->
@@ -79,8 +64,6 @@
         <input type="hidden" value="" id="user-confidence" name="user[confidence]">
         <input type="hidden" value="" id="current-url" name="user[url];">
     </form>
-    <!-- Audio Section Starts -->
-    <div id=" audios-container"></div>
     <%-body-%>
     <!--Bootstrap Combined Js file-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -90,10 +73,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js"
         integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Web Rtc CDN 2 -->
-    <script src="https://cdn.webrtc-experiment.com/commits.js" async></script>
-    <!-- Recording Audio and Sending to Server -->
-    <script src="/js/useraudio.js"></script>
     <!-- Speech to Text Conversion -->
     <script src="/js/speechToText.js"></script>
     <!-- Developer Typed.js file -->

@@ -78,14 +78,23 @@ app.get("/about", (req, res) => {
   res.render("about/about.ejs", { src: src });
 });
 
+// How to Use Route
+app.get("/howtouse", (req, res) => {
+  res.locals.title = "howtouse";
+  if (!src) {
+    src = "";
+  }
+  res.render("howtouse/howtouse.ejs", { src: src });
+});
+
 //Programmes Route
-app.get("/programs/:id", (req, res) => {
+app.get("/more/:id", (req, res) => {
   const { id } = req.params;
   if (!src) {
     src = "";
   }
-  res.locals.title = "programs";
-  res.render("programs/programs.ejs", { id: id, src: src });
+  res.locals.title = "more";
+  res.render("more/more.ejs", { id: id, src: src });
 });
 
 //Starting up server

@@ -19,7 +19,7 @@ header nav {
 }
 
 .navbar-brand {
-    width: 15vw;
+    width: 9vw;
     height: 4vw;
 }
 
@@ -60,24 +60,28 @@ header nav {
     --animate-duration: 1.5s;
 }
 
-.intro h1 {
+.intro h1,
+#howtouse-section h2 {
     font-size: 4em;
     font-weight: 500;
     line-height: 1.5em;
 }
 
-.intro p {
+.intro p,
+#howtouse-section p {
     font-size: 1.2em;
     font-weight: 300;
     line-height: 1.2em;
 }
 
-.intro img {
+.intro img,
+#howtouse-section img {
     mix-blend-mode: luminosity;
     transition: 0.4s all;
 }
 
-.intro img:hover {
+.intro img:hover,
+#howtouse-section img:hover {
     mix-blend-mode: initial;
 }
 
@@ -148,3 +152,6 @@ header nav {
 }
 
 /* Speech to Text Section Ends */
+/* How to Use Section Starts */
+
+/* How to Use Section Ends */
