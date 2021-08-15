@@ -87,14 +87,35 @@ app.get("/howtouse", (req, res) => {
   res.render("howtouse/howtouse.ejs", { src: src });
 });
 
-//Programmes Route
-app.get("/more/:id", (req, res) => {
+//More Routes
+// motivation Route
+app.get("/more/motivation", (req, res) => {
   const { id } = req.params;
   if (!src) {
     src = "";
   }
   res.locals.title = "more";
-  res.render("more/more.ejs", { id: id, src: src });
+  res.render("more/motivation.ejs", { id: id, src: src });
+});
+
+// benificiary Route
+app.get("/more/beneficiary", (req, res) => {
+  const { id } = req.params;
+  if (!src) {
+    src = "";
+  }
+  res.locals.title = "more";
+  res.render("more/beneficiary.ejs", { id: id, src: src });
+});
+
+// technology Route
+app.get("/more/beneficiary", (req, res) => {
+  const { id } = req.params;
+  if (!src) {
+    src = "";
+  }
+  res.locals.title = "more";
+  res.render("more/technology.ejs", { id: id, src: src });
 });
 
 //Starting up server

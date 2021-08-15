@@ -1,12 +1,12 @@
 // Primary loader Function to Start the Process
-window.addEventListener("load", () => {
-  audioCheck();
-});
+// window.addEventListener("load", () => {
+//   audioCheck();
+// });
 
-// Double CLick to Restart the Process
-window.addEventListener("dblclick", () => {
-  playDefaultAudio();
-});
+// // Double CLick to Restart the Process
+// window.addEventListener("dblclick", () => {
+//   playDefaultAudio();
+// });
 
 const audioCheck = () => {
   // Check if there is any Audio to be played or user wants to exit
