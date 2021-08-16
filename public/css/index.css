@@ -95,6 +95,8 @@ header nav {
 #technology-section img {
     mix-blend-mode: luminosity;
     transition: 0.4s all;
+    border: 1px solid #000;
+    border-radius: 50%;
 }
 
 .intro img:hover,
