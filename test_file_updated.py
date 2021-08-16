@@ -28,7 +28,7 @@ def text_to_speech(text):
     engine.runAndWait()
     language = 'en'
     myobj = gTTS(text=text, lang=language, slow=True)
-    myobj.save("public/audio/sample.mp3")
+    myobj.save("public/chamar/sample.mp3")
 
 def scrape(urls):
     # print('text scrape')
