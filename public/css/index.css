@@ -51,6 +51,18 @@ header nav {
     border-color: #eee;
 }
 
+@media only screen and (max-width: 780px) {
+
+    html {
+        font-size: 12px;
+    }
+
+    .navbar-brand {
+        width: 32vw;
+        height: 10vw;
+    }
+}
+
 /* End Navbar Editing */
 /* Introduction Editing Starts */
 
