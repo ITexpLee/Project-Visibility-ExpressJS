@@ -1,2 +1,0 @@
-abc = "/about"
-print(abc)
