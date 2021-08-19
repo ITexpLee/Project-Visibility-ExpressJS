@@ -52,13 +52,15 @@
     </header>
     <!-- Navbar Section Ends -->
     <!-- Default Audio -->
-    <audio src="/audio/intro.mp3" id="initial-audio"></audio>
+    <!-- <audio src="/audio/intro.mp3" id="initial-audio"></audio> -->
+    <audio src="https://visibility-audio.s3.amazonaws.com/intro.mp3" id="initial-audio" class="d-none"></audio>
     <!-- Python Audio -->
     <% if(src !== undefined) {%>
     <audio src="<%=src%>" class="d-none" id="python-audio"></audio>
     <% } %>
     <!-- Stop Audio -->
-    <audio src="/audio/stop.mp3" class="d-none" id="stop-audio"></audio>
+    <!-- <audio src="/audio/stop.mp3" class="d-none" id="stop-audio"></audio> -->
+    <audio src="https://visibility-audio.s3.amazonaws.com/stop.mp3" class="d-none" id="stop-audio"></audio>
     <!-- Default form -->
     <form action="/" method="POST" id="express">
         <input type="hidden" value="" id="user-text" name="user[text]">
