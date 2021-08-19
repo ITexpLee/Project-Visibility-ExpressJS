@@ -36,27 +36,29 @@ app.post("/", (req, res) => {
   const userInformation = req.body.user;
   // Using spawn to call python script
   const childPython = spawn("python", [
-    "visibility-project-python.py",
+    "hello.py",
     JSON.stringify(userInformation),
   ]);
   //Execute the python script and fetch data
   childPython.stdout.on("data", (data) => {
     const doIt = data.toString();
+    console.log(doIt.length);
+    res.redirect("/about");
     // Parsing JSON to JavaScript Object
-    let pythonData = JSON.parse(data);
+    // let pythonData = JSON.parse(data);
     // Destructing the object and creating variables
-    let str = pythonData.str;
-    src = pythonData.src;
-    console.log(`total python data ${doIt}`);
+    // let str = pythonData.str;
+    // src = pythonData.src;
+    // console.log(`total python data ${doIt}`);
     // console.log(`source printed by python ${src}`);
     // User if he wants to stop traversing
     // src = "stop";
     // Redirecting to the specified link
-    if (str === "stop") {
-      res.redirect(url);
-    } else {
-      res.redirect(str);
-    }
+    // if (str === "stop") {
+    //   res.redirect(url);
+    // } else {
+    //   res.redirect(str);
+    // }
   });
   childPython.stderr.on("data", (data) => {
     console.error(`stdError ${data}`);
