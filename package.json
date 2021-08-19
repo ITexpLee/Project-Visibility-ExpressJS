@@ -19,5 +19,9 @@
     "python-shell": "^3.0.0",
     "typed.js": "^2.0.12",
     "videojs-record": "^4.5.0"
+  },
+  "engines": {
+    "node": ">= 12.18.4",
+    "npm": ">= 7.20.3"
   }
 }
