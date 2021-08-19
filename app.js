@@ -21,14 +21,11 @@ app.use(express.static(path.join(__dirname, "public"))); //It will serve our sta
 // Creating global variable for src file of mp3
 
 // Global variable to store audio src
-var src;
+var src = "";
 
 // Index/Homepage Route
 app.get("/", (req, res) => {
   res.locals.title = "home";
-  if (!src) {
-    src = "";
-  }
   res.render("home/home.ejs", { src: src });
 });
 
@@ -39,7 +36,7 @@ app.post("/", (req, res) => {
   const userInformation = req.body.user;
   // Using spawn to call python script
   const childPython = spawn("python", [
-    "test_file_updated.py",
+    "visibility-project-python.py",
     JSON.stringify(userInformation),
   ]);
   //Execute the python script and fetch data
@@ -72,18 +69,12 @@ app.post("/", (req, res) => {
 // About Route
 app.get("/about", (req, res) => {
   res.locals.title = "about";
-  if (!src) {
-    src = "";
-  }
   res.render("about/about.ejs", { src: src });
 });
 
 // How to Use Route
 app.get("/howtouse", (req, res) => {
   res.locals.title = "howtouse";
-  if (!src) {
-    src = "";
-  }
   res.render("howtouse/howtouse.ejs", { src: src });
 });
 
@@ -91,9 +82,6 @@ app.get("/howtouse", (req, res) => {
 // motivation Route
 app.get("/motivation", (req, res) => {
   const { id } = req.params;
-  if (!src) {
-    src = "";
-  }
   res.locals.title = "more";
   res.render("more/motivation.ejs", { id: id, src: src });
 });
@@ -101,19 +89,13 @@ app.get("/motivation", (req, res) => {
 // benificiary Route
 app.get("/beneficiary", (req, res) => {
   const { id } = req.params;
-  if (!src) {
-    src = "";
-  }
   res.locals.title = "more";
   res.render("more/beneficiary.ejs", { id: id, src: src });
 });
 
 // technology Route
-app.get("/technology", (req, res) => {
+app.get("/technologies", (req, res) => {
   const { id } = req.params;
-  if (!src) {
-    src = "";
-  }
   res.locals.title = "more";
   res.render("more/technology.ejs", { id: id, src: src });
 });
