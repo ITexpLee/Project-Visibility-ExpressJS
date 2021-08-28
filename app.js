@@ -46,12 +46,13 @@ app.post("/", (req, res) => {
     let pythonData = JSON.parse(data);
     // Destructing the object and creating variables
     let str = pythonData.str;
-    src = "https://visibility-audio.s3.amazonaws.com/sample.mp3";
+    src = pythonData.src;
+    console.log(`total python data ${doIt}`);
+    // console.log(`source printed by python ${src}`);
     // User if he wants to stop traversing
     // src = "stop";
     // Redirecting to the specified link
     if (str === "stop") {
-      src = "stop";
       res.redirect(url);
     } else {
       res.redirect(str);
